@@ -1,0 +1,56 @@
+{
+  "upload_type": "dataset",
+  "title": "Connecting Methane Ebullition to Thaw Pond size using Unpiloted Aerial Systems",
+  "description": "This repository contains source code and datasets used for figure creation and statistical analysis for the above titled manuscript.",
+  "creators": [
+    {
+      "name": "Burke, Sophia A", 
+      "affiliation": "University of New Hampshire",
+      "orcid": "0000-0002-5933-2347"
+    },
+    {
+      "name": "Palace, Michael ", 
+      "affiliation": "University of New Hampshire",
+      "orcid": "0000-0002-3505-2906"
+    },
+    {
+      "name": "Contosta, Alexandra R.", 
+      "affiliation": "University of New Hampshire",
+      "orcid": "0000-0002-1201-1765"
+    },
+    {
+      "name": "Perryman, Clarice R.", 
+      "affiliation": "University of New Hampshire",
+      "orcid": "0000-0002-5086-6684"
+    },
+    {
+      "name": "Bennett, Kathryn A.", 
+      "affiliation": "University of New Hampshire",
+      "orcid": "0000-0001-7563-2537"
+    },
+    {
+      "name": "Rocci, Katharine S.", 
+      "affiliation": "Colorado State University",
+      "orcid": "0000-0003-4235-6833"
+    },
+    {
+      "name": "DelGreco, Jessica", 
+      "affiliation": "University of New Hampshire"
+    },
+    {
+      "name": "Herrick, Christina", 
+      "affiliation": "University of New Hampshire",
+      "orcid": "0000-0002-8384-9450"
+    },
+    {
+      "name": "Crill, Patrick", 
+      "affiliation": "Stockholm University",
+      "orcid": "0000-0003-1110-3059"
+    },
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "keywords": ["thaw ponds","permafrost peatlands","unpiloted aerial systems","remote sensing","methane","ebullition","Stordalen Mire", "EMERGE Biology Integration Institute"],
+  "version": "0.0.0",
+  "communities": [{"identifier": "emerge-bii"}]
+}
