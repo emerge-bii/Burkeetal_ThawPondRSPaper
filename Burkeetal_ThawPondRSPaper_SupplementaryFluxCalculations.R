@@ -339,3 +339,86 @@ cor.test(Quad_Water_PondPolygons$area_m2,
 
 ## Median8dC_BubFlux was the most significant with a p value of .02, so we chose
 # to focus our further tests on Median8dC_BubFlux
+
+# Code below is used to build Figure S1 (Daily avg. bubble flux by pond)
+# calculate mean daily bubbly flux 2012-2018
+Summary_TotDailyAvgBubbleFlux2 = ddply(ExpandBubFlux,.(Burkeetal2019_ID),summarize,
+                                       meanFluxSP = mean(DailyAvgBubbleFlux,na.rm = TRUE))
+
+# for plotting
+Pondcolors = c(rgb(254,224,144,maxColorValue = 255),#D (A)
+               rgb(224,243,248,maxColorValue = 255),#E (B)
+               rgb(69,117,180,maxColorValue = 255), # S (C)
+               rgb(253,174,97,maxColorValue = 255),#C (D)
+               rgb(215,48,39, maxColorValue = 255),#A (E)
+               rgb(244,109,67,maxColorValue = 255),#B (F)
+               #rgb(171,217,233, maxColorValue = 255),#F (G)
+               rgb(116,173,209,maxColorValue = 255))#R (H)
+
+plot.new()
+par(mfrow=c(1,1))
+par(mar=c(5,5.5,2,3))
+
+boxplot(DailyAvgBubbleFlux~Burkeetal2019_ID, data = BubFlux_2012to2018, axes = FALSE, ylab = " ",
+        xlab = " ", ylim = c(0,310), whisklty =1, whisklwd = 2, outcol = "grey", outpch = 16, outcex = 1.5, medlwd = 3, col = Pondcolors)
+rect(0.5, 250, 11.5,350 , col ="white", border = NA)# removes the outliers that are above the yaxis limit of 250
+
+BubFlux_2012to2018$thresh = ifelse(BubFlux_2012to2018$DailyAvgBubbleFlux > 250, 1, 0)
+
+table(BubFlux_2012to2018$thresh) # 32 outliers removed
+
+box(lty = 1, lwd =2)
+axis(2, at = c(0,50,100,150,200,250,300), cex.axis = 1.5, las = 2)
+axis(4, at = c(0,50,100,150,200,250,300), cex.axis = 1.5, las = 2)
+mtext(side = 1,expression ("Pond"), line = 4, outer = FALSE, cex = 1.5)
+axis(1, at = c(1:8), lab = c ("A","B","C","D","E","F","G", "H"), cex.axis = 1.5)
+mtext(side = 2,expression("Daily Bubble Flux (mg " *CH[4]*~m^{-2}*d^{-1}*")*"),line = 3.5,outer = FALSE, cex = 1.5)
+points(Summary_TotDailyAvgBubbleFlux2$meanFluxSP,pch = 17,cex = 1.5)
+
+#significance letters
+text(1,18,expression("a"), cex = 1.5)
+text(2,75,expression("a"), cex = 1.5)
+text(3,135,expression("b"), cex = 1.5)
+text(4,110,expression("b"), cex = 1.5)
+text(5,260,expression("c"), cex = 1.5)
+text(6,260,expression("c"), cex=1.5)
+text(7,150,expression("d"), cex= 1.5)
+text(8,225,expression("d"), cex= 1.5)
+
+# Use the kruskal function to perform a Kruskal-Wallis test, providing a H 
+# statistic and a p-value, as well as perform a multiple pairwise comparison
+# and provide the final lower case letters signifying significant differences.
+kruskal(ExpandBubFlux$DailyAvgBubbleFlux,ExpandBubFlux$Burkeetal2019_ID,
+        alpha = 0.05, p.adj = c("bonferroni"), group = TRUE, console = TRUE)
+# I used the kruskal.test() function to double check what the p value of the test
+# is given the kruskal() function cannot approximate very significant p values
+kruskal.test(DailyAvgBubbleFlux~Burkeetal2019_ID, data = ExpandBubFlux)
+
+text(3, 300, expression("H = 1514.8"), cex = 1.25)
+text(5, 300, expression("d.f. = 7"), cex = 1.25)
+text(7, 300, expression(italic("p")~"< 0.0001"), cex = 1.25)
+
+
+mtext(side = 1, expression(bolditalic("n = ")), line = 2.25, outer = FALSE, 
+      at = 0, cex = 1.25 )
+mtext(side = 1, expression(bolditalic("264")), line = 2.25, outer = FALSE, at = 1, 
+      cex = 1.25)
+mtext(side = 1, expression(bolditalic("354")), line = 2.25, outer = FALSE, at = 2, 
+      cex = 1.25)
+mtext(side = 1, expression(bolditalic("498")), line = 2.25, outer = FALSE, at = 3, 
+      cex = 1.25)
+mtext(side = 1, expression(bolditalic("485")), line = 2.25, outer = FALSE, at = 4, 
+      cex = 1.25)
+mtext(side = 1, expression(bolditalic("684")), line = 2.25, outer = FALSE, at = 5, 
+      cex = 1.25)
+mtext(side = 1, expression(bolditalic("920")), line = 2.25, outer = FALSE, at = 6, 
+      cex = 1.25)
+mtext(side = 1, expression(bolditalic("72")), line = 2.25, outer = FALSE, at = 7, 
+      cex = 1.25)
+mtext(side = 1, expression(bolditalic("516")), line = 2.25, outer = FALSE, at = 8, 
+      cex = 1.25)
+
+mtext(side = 1, expression(italic("* = 32 outliers removed")), line= 4, outer = FALSE, at = 0)
+
+
+
